@@ -1,43 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <%
-    var title = page.title;
-    if (is_archive()) {
-      title = 'Archives';
-      if (is_month())
-        title += ': ' + page.year + '/' + page.month;
-      else if (is_year())
-        title += ': ' + page.year;
-    }
-    else if (is_category())
-      title = 'Category: ' + page.category;
-    else if (is_tag())
-      title = 'Tag: ' + page.tag;
-  %>
-  <title><% if (title) { %><%= title %> | <% } %><%= config.title %></title>
-  <meta name="description" content="<%- theme.description %>" />
-  <meta name="keywords" content="<%- theme.keywords %>" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
-  <% if (theme.rss) { %>
-    <link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
-  <% } %>
-  <% if (theme.favicon) { %>
-    <link rel="icon" href="<%- theme.favicon %>">
-  <% } %>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<%
+		var title = page.title;
+		if (is_archive()) {
+			title = 'Archives';
+			if (is_month())
+				title += ': ' + page.year + '/' + page.month;
+			else if (is_year())
+				title += ': ' + page.year;
+		}
+		else if (is_category())
+			title = 'Category: ' + page.category;
+		else if (is_tag())
+			title = 'Tag: ' + page.tag;
+	%>
+	<title><% if (title) { %><%= title %> | <% } %><%= config.title %></title>
+	<meta name="description" content="<%- theme.description %>" />
+	<meta name="keywords" content="<%- theme.keywords %>" />
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
+	<% if (theme.rss) { %>
+		<link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
+	<% } %>
+	<% if (theme.favicon) { %>
+		<link rel="icon" href="<%- theme.favicon %>">
+	<% } %>
+	<%- css('style.css') %>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css'>
 
-	<script src="https://use.typekit.net/eyf3hir.js"></script>
-  <script>try{Typekit.load({ async: false });}catch(e){}</script>
-  <%- css('style.css') %>
-  <script>
-    function setLoadingBarProgress(num) {
-      document.getElementById('loading-bar').style.width=num+"%";
-    }
-  </script>
-  <%- partial('google-analytics') %>
+	<script>
+		function setLoadingBarProgress(num) {
+			document.getElementById('loading-bar').style.width=num+"%";
+		}
+	</script>
+	<%- partial('google-analytics') %>
+	<!-- typekit source open san -->
+	<script>
+	(function(d) {
+		var config = {
+			kitId: 'ddk2nzk',
+			scriptTimeout: 3000,
+			async: true
+		},
+		h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+	})(document);
+	</script>
 </head>

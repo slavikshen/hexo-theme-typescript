@@ -1,26 +1,56 @@
 <%- partial('_partial/head') %>
 <body>
-  
-  <%- partial('_partial/loading') %>
-  <script>setLoadingBarProgress(20)</script>
-  
-  <div id="site-wrapper">
-    
-    <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
-    <script>setLoadingBarProgress(40);</script>
-    
-    <main id="main" role="main">
-      <%- body %>
-      <script>setLoadingBarProgress(60);</script>
-    </main>
-    
-    <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
-    <script>setLoadingBarProgress(80);</script>
-    
-  </div>
+	
+	<%- partial('_partial/loading') %>
+	<script>setLoadingBarProgress(20)</script>
+	
+	<div id="site-wrapper">
+		
+		<%- partial('_partial/header', null, {cache: !config.relative_link}) %>
+		<script>setLoadingBarProgress(40);</script>
+		
+		<main id="main" role="main">
+			<%- body %>
+			<script>setLoadingBarProgress(60);</script>
+		</main>
+		
+		<%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
+		<script>setLoadingBarProgress(80);</script>
+		
+	</div>
 
-  <%- partial('_partial/scripts') %>
-  <script>setLoadingBarProgress(100);</script>
-  
+	<div id="site-menu">
+		<div class='menu-container'>
+			<div class='author-profile'>
+				<div class='profile-image' style="background-image: url('<%= theme.profile_image %>')">
+				</div>
+				<h5 class='title'><%= config.author %></h5>
+			</div>
+			<nav>
+				<% theme.navigation.forEach(function(value, key) {
+							if (value.url && value.slug && value.name) { %>
+					<a href="<%= value.url %>" class="nav-<%= value.slug %> nav">
+						<i class="fa fa-<%= value.icon %>"></i><span><%= value.name %></span>
+					</a>
+				<% } }); %>
+				<% if (theme.social) { %>
+					<% theme.social.forEach(function(value, key) {
+							if (value.url && value.slug) { %>
+						<a href="<%= value.url %>" class="nav-<%= value.slug %> nav"
+							target="_blank" rel="external">
+							<i class="fa fa-<%= value.icon %>"></i><span><%= value.slug %></span>
+						</a>
+					<% } }); %>
+				<% } %>
+			</nav>
+			<div class='footer'>
+				<h5 class='small'>version <%= theme.version %></h5>
+			</div>
+		</div>
+	</div>
+
+	<%- partial('_partial/scripts') %>
+	<script>setLoadingBarProgress(100);</script>
+	
 </body>
 </html>
